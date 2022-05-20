@@ -13,17 +13,14 @@ app.use(compression());
 
 // Serve client static files
 const options = {
-  fallthrough: true, 
+  fallthrough: true,
   setHeaders: (res) => {
     res.set("x-timestamp", Date.now());
-  }
+  },
 };
 
 // Use express.static to serve the client folder
-app.use("/", express.static(
-  path.join(__dirname, "../client/build"),
-  options
-));
+app.use("/", express.static(path.join(__dirname, "../client/build"), options));
 
 // Parse request body
 app.use(express.json());
