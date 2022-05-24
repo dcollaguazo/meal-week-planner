@@ -23,9 +23,6 @@ const ResponsiveAppBar = () => {
           <Logo />
           <Pages />
           <UserMenu />
-
-          
-
         </Toolbar>
       </Container>
     </AppBar>
