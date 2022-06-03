@@ -1,22 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RecipesList } from "./components/RecipesList";
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
+import { useSelector, useDispatch } from "react-redux";
+import { setRecipes, setCode, setUser, getRecipes } from "../../redux/actions/actions";
+// import { getRecipesAPI } from "../../redux/api/getRecipesAPI";
 
 export function Home() {
-  const recipes = [
-    {name: "recipeName", photo: "recipePhoto", ingredients: "recipeIngredients", instructions: "recipeInstructions"},
-    {name: "recipeName", photo: "recipePhoto", ingredients: "recipeIngredients", instructions: "recipeInstructions"},
-    {name: "recipeName", photo: "recipePhoto", ingredients: "recipeIngredients", instructions: "recipeInstructions"},
-    {name: "recipeName", photo: "recipePhoto", ingredients: "recipeIngredients", instructions: "recipeInstructions"},
-    {name: "recipeName", photo: "recipePhoto", ingredients: "recipeIngredients", instructions: "recipeInstructions"},
-    {name: "recipeName", photo: "recipePhoto", ingredients: "recipeIngredients", instructions: "recipeInstructions"},
-  ];
+  const dispatch = useDispatch();
+
+  const recipes = useSelector(function (state){
+    const recipes = state.recipes.data;
+    return recipes;
+  });
+
+  useEffect(() => {
+    dispatch(getRecipes());
+  },[dispatch]);
   
+  console.log("5");
+
   return (
     <>
-    <Container maxWidth="100%">
-      <RecipesList recipes={recipes}/>
-    </Container>
+      <Container maxWidth="100%">
+        <RecipesList recipes={recipes} />
+      </Container>
     </>
   );
 }
